@@ -22,10 +22,6 @@ import {
   Typography,
   createStyles,
   makeStyles,
-  IconButton,
-  Menu,
-  MenuItem,
-  Checkbox,
   Divider,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -37,7 +33,6 @@ import { Status } from './components/Status';
 import { ActivityStream } from './components/ActivityStream';
 import { Selectors } from './components/Selectors';
 import { useEmptyIssueTypeFilter } from '../../hooks/useEmptyIssueTypeFilter';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,20 +85,8 @@ export const JiraCard = (_props: EntityProps) => {
     fetchProjectInfo,
   } = useProjectInfo(projectKey, component, statusesNames);
   const {
-    issueTypes: displayIssues,
-    type,
-    changeType,
+    issueTypes: displayIssues
   } = useEmptyIssueTypeFilter(issues);
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <InfoCard
@@ -113,31 +96,6 @@ export const JiraCard = (_props: EntityProps) => {
         project && (
           <CardProjectDetails project={project} component={component} />
         )
-      }
-      actionsTopRight={
-        <>
-          <IconButton
-            className={classes.actions}
-            aria-label="more"
-            aria-controls="long-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={changeType}>
-              <Checkbox checked={type === 'all'} />
-              <>Show empty issue types</>
-            </MenuItem>
-          </Menu>
-        </>
       }
       deepLink={{
         link: `${project?.url}/browse/${projectKey}`,

@@ -1,5 +1,5 @@
 {
-  "name": "@roadiehq/backstage-plugin-jira",
+  "name": "@lvfs/backstage-plugin-jira",
   "version": "1.0.2",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -11,7 +11,7 @@
   },
   "repository": "github:RoadieHQ/backstage-plugin-jira",
   "publishConfig": {
-    "access": "public",
+    "access": "restricted",
     "main": "dist/index.esm.js",
     "types": "dist/index.d.ts"
   },
